@@ -4,6 +4,7 @@
  */
 package edu.itch2.oop.veterinaria;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -59,8 +60,12 @@ public class Perro {
         return noRegistro;
     }
 
-    public void setNoRegistro(int noRegistro) {
-        this.noRegistro = noRegistro;
+    public void generarRegistro() {
+        this.noRegistro = this.hashCode();
+        /*LocalDateTime temp = LocalDateTime.now();
+        this.noRegistro = temp.getYear() + temp.getMonthValue() + 
+                temp.getDayOfMonth() + temp.getHour() + 
+                temp.getMinute() + temp.getSecond() + temp.getNano() + this.nombre.hashCode();*/
     }
 
     public String getTipoSangre() {
@@ -102,13 +107,21 @@ public class Perro {
         this.alergias.add(alergia);
     }
     
-    public void removeAlergia(int index) {
+    public boolean removeAlergia(int index) {
+        if (index >= this.alergias.size() || index < 0) {
+            return false;
+        }
         this.alergias.remove(index);
+        return true;
     }
     
-    public void editAlergia(int index, String alergia) {
+    public boolean editAlergia(int index, String alergia) {
+        if (index >= this.alergias.size() || index < 0) {
+            return false;
+        }
         this.alergias.remove(index);
         this.alergias.add(index, alergia);
+        return true;
     }
     
     public int getSizeAlergias() {
@@ -141,12 +154,40 @@ public class Perro {
         this.altura = altura;
     }
 
-    public ArrayList getVacunas() {
+    public ArrayList getAllVacunas() {
         return vacunas;
     }
-
-    public void setVacunas(ArrayList vacunas) {
-        this.vacunas = vacunas;
+    
+    public String getVacuna(int index) {
+        if (index >= this.vacunas.size() || index < 0) {
+            return "Vacuna no disponible";
+        }
+        return (String) this.vacunas.get(index);
+    }
+    
+    public void addVacunas(String vacuna) {
+        this.vacunas.add(vacuna);
+    }
+    
+    public boolean removeVacuna(int index) {
+        if (index >= this.vacunas.size() || index < 0) {
+            return false;
+        }
+        this.vacunas.remove(index);
+        return true;
+    }
+    
+    public boolean editVacuna(int index, String vacuna) {
+        if (index >= this.vacunas.size() || index < 0) {
+            return false;
+        }
+        this.vacunas.remove(index);
+        this.vacunas.add(index, vacuna);
+        return true;
+    }
+    
+    public int getSizeVacuna() {
+        return this.vacunas.size();
     }
 
     public Date getFechaNacimiento() {
@@ -157,20 +198,76 @@ public class Perro {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public ArrayList getEnfermedades() {
-        return enfermedades;
+    public ArrayList getAllEnfermedades() {
+        return vacunas;
+    }
+    
+    public String getEnfermedad(int index) {
+        if (index >= this.enfermedades.size() || index < 0) {
+            return "Vacuna no disponible";
+        }
+        return (String) this.enfermedades.get(index);
+    }
+    
+    public void addEnfermedades(String enfermedad) {
+        this.enfermedades.add(enfermedad);
+    }
+    
+    public boolean removeEnfermedad(int index) {
+        if (index >= this.enfermedades.size() || index < 0) {
+            return false;
+        }
+        this.enfermedades.remove(index);
+        return true;
+    }
+    
+    public boolean editEnfermedad(int index, String enfermedad) {
+        if (index >= this.enfermedades.size() || index < 0) {
+            return false;
+        }
+        this.enfermedades.remove(index);
+        this.enfermedades.add(index, enfermedad);
+        return true;
+    }
+    
+    public int getSizeEnfermedad() {
+        return this.enfermedades.size();
     }
 
-    public void setEnfermedades(ArrayList enfermedades) {
-        this.enfermedades = enfermedades;
-    }
-
-    public ArrayList getConsultas() {
+    public ArrayList getAllConsultas() {
         return consultas;
     }
-
-    public void setConsultas(ArrayList consultas) {
-        this.consultas = consultas;
+    
+    public String getConsulta(int index) {
+        if (index >= this.consultas.size() || index < 0) {
+            return "Vacuna no disponible";
+        }
+        return (String) this.consultas.get(index);
+    }
+    
+    public void addConsulta(String consulta) {
+        this.consultas.add(consulta);
+    }
+    
+    public boolean removeConsulta(int index) {
+        if (index >= this.consultas.size() || index < 0) {
+            return false;
+        }
+        this.consultas.remove(index);
+        return true;
+    }
+    
+    public boolean editConsulta(int index, String consulta) {
+        if (index >= this.consultas.size() || index < 0) {
+            return false;
+        }
+        this.consultas.remove(index);
+        this.consultas.add(index, consulta);
+        return true;
+    }
+    
+    public int getSizeConsulta() {
+        return this.consultas.size();
     }
     
     
