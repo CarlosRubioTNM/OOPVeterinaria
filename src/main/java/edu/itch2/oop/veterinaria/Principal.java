@@ -35,6 +35,12 @@ public class Principal {
         ArrayList alergias = perro.getAllAlergias();
         System.out.println(alergias);
         System.out.println("La alergia de " + perro.getNombre() + " es: " + alergia);
+        perro.generarRegistro();
+        Perro solovino = new Perro();
+        solovino.setNombre("solovino");
+        solovino.generarRegistro();
+        System.out.println("El registro de " + perro.getNombre() + " es: " + perro.getNoRegistro());
+        System.out.println("El registro de " + solovino.getNombre() + " es: " + solovino.getNoRegistro());
     }
   
 }
