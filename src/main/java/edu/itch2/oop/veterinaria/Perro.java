@@ -21,14 +21,38 @@ public class Perro {
     private String tipoSangre;
     private String raza;
     private double peso;
-    private ArrayList alergias = new ArrayList();
+    private ArrayList alergias;
     private String color;
     private String dueno;
     private double altura;
-    private ArrayList vacunas = new ArrayList();
+    private ArrayList vacunas;
     private Date fechaNacimiento;
-    private ArrayList enfermedades = new ArrayList();
-    private ArrayList consultas = new ArrayList();
+    private ArrayList enfermedades;
+    private ArrayList consultas;
+    
+    //Constructor
+    public Perro() {
+        this.alergias = new ArrayList();
+        this.vacunas = new ArrayList();
+        this.enfermedades = new ArrayList();
+        this.consultas = new ArrayList();
+        this.nombre = "Dato no establecido";
+        this.raza = "Chihuahua";
+        this.dueno = "Dato no establecido";
+        this.color = "Dato no establecido";
+        this.tipoSangre = "Dato no establecido";
+        this.fechaNacimiento = new Date();
+        this.generarRegistro();
+    }
+    
+    public Perro(String nombre) {
+        this();
+        this.nombre = nombre;
+    }
+    
+    public Perro(String raza, String nombre) {
+        
+    }
     
     
     //Métodos
