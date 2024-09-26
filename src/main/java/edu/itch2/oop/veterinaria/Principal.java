@@ -51,7 +51,6 @@ public class Principal {
         Perro max = new Perro();
         //System.out.println(max.getNoRegistro());
         Perro min = max;
-        Perro weiofneoi = max.clone();
         //System.out.println(min.getNoRegistro());
         Perro flash = new Perro("Chihuahua", "Flash");
         //System.out.println(flash.getNombre());
@@ -59,16 +58,23 @@ public class Principal {
         int a = 5;
         int b = 5;
         
-        min.setRaza("Xoloesquincle");
-        min = new Perro();
-        System.out.println(max);
-        System.out.println(min);
-        if (max == min) {
+        Perro firulais = new Perro("Firulais");
+        Date firulais2 = new Date();
+        if (firulais.equals(firulais2)) {
             System.out.println("Son iguales");
         } else {
             System.out.println("Son diferentes");
         }
         
+        Gato michi = new Gato("Siames", "Michi");
+        System.out.println("Hola " + michi.getNombre() + "!");
+        Perro frijol = new Perro("Salchicha", "Frijol");
+        System.out.println("Hola " + frijol.getNombre() + "!");
+        Perro otro = new Perro();
+        System.out.println(otro.getRaza());
+        
+        Caballo lucero = new Caballo("Lucero");
+        System.out.println("Hola! " + lucero.getNombre() + ".");
         
     }
   

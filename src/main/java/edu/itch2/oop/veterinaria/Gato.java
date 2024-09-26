@@ -4,41 +4,40 @@
  */
 package edu.itch2.oop.veterinaria;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-
-
 
 /**
  *
  * @author Carlos Rubio
  */
-public class Perro extends Animal{
+public class Gato extends Animal {
     //Atributos
     
     //Constructor
-    public Perro() {
+    public Gato() {
         super();
     }
     
-    public Perro(String nombre) {
+    public Gato(String nombre) {
         super(nombre);
     }
     
-    public Perro(String raza, String nombre) {
+    public Gato(String raza, String nombre) {
         super(raza, nombre);
     }
     
-    
+
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Perro)) {
+        if (!(obj instanceof Gato)) {
             return false;
         }
-        Perro p = (Perro) obj; //Casting
+        Gato p = (Gato) obj; //Casting
         
         return this.nombre.equals(p.nombre) 
                 && this.dueno.equals(p.dueno);
-    }   
+    }
+    
+    
 }
