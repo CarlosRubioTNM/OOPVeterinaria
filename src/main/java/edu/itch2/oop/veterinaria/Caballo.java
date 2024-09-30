@@ -30,4 +30,28 @@ public class Caballo extends Animal{
         this.velocidad_maxima = VELOCIDAD_INICIAL;
         this.pedigree = NOT_SPECIFIED;
     }
+
+    public double getVelocidad_maxima() {
+        return velocidad_maxima;
+    }
+
+    public void setVelocidad_maxima(double velocidad_maxima) {
+        this.velocidad_maxima = velocidad_maxima;
+    }
+
+    public String getPedigree() {
+        return pedigree;
+    }
+
+    public void setPedigree(String pedigree) {
+        this.pedigree = pedigree;
+    }
+
+    @Override
+    public String toString() {
+        return "Caballo con nombre: " + this.getNombre() + 
+                " y velocidad maxima: " + this.getVelocidad_maxima();
+    }
+    
+    
 }

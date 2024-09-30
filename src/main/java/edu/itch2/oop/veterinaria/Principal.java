@@ -53,6 +53,7 @@ public class Principal {
         Perro min = max;
         //System.out.println(min.getNoRegistro());
         Perro flash = new Perro("Chihuahua", "Flash");
+        
         //System.out.println(flash.getNombre());
         //System.out.println(flash.getRaza());
         int a = 5;
@@ -75,6 +76,15 @@ public class Principal {
         
         Caballo lucero = new Caballo("Lucero");
         System.out.println("Hola! " + lucero.getNombre() + ".");
+        
+        //Animal a1 = new Animal();
+        Animal a1 = new Caballo("Prancer");
+        //System.out.println(a1.getPedigree());
+        Caballo c1 = (Caballo) a1;
+        c1.setVelocidad_maxima(60);
+        System.out.println(solovino);
+        
+        //System.out.println(c1.getNombre());
         
     }
   

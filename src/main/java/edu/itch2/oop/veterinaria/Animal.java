@@ -293,4 +293,11 @@ public class Animal {
         return this.consultas.size();
     }
 
+    @Override
+    public String toString() {
+        return "Animal con nombre: " + this.getNombre() + " y dueño" + this.getDueno();
+    }
+    
+    
+
 }
