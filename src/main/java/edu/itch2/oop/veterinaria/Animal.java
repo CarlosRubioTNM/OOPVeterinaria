@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Carlos Rubio
  */
-public class Animal {
+public abstract class Animal {
     //Atributos
     protected int noRegistro;
     protected String nombre;
@@ -292,6 +292,8 @@ public class Animal {
     public int getSizeConsulta() {
         return this.consultas.size();
     }
+    
+    public abstract void comer();
 
     @Override
     public String toString() {

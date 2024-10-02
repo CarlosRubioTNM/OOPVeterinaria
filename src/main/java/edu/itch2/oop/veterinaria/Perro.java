@@ -30,6 +30,12 @@ public class Perro extends Animal{
         super(raza, nombre);
     }
     
+    @Override
+    public void comer() {
+        System.out.println("Se le dieron croquetas Dog Chow a " + 
+                this.getNombre());
+    }
+    
     
     @Override
     public boolean equals(Object obj) {

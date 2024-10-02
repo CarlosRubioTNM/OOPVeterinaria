@@ -46,6 +46,12 @@ public class Caballo extends Animal{
     public void setPedigree(String pedigree) {
         this.pedigree = pedigree;
     }
+    
+    @Override
+    public void comer() {
+        System.out.println("Se le dieron manzanas a " + 
+                this.getNombre());
+    }
 
     @Override
     public String toString() {
