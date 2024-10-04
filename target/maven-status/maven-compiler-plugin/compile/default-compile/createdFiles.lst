@@ -1,6 +1,8 @@
-edu\itch2\oop\veterinaria\Principal.class
-edu\itch2\oop\veterinaria\Perro.class
 edu\itch2\oop\test\PruebaPaquete.class
+edu\itch2\oop\veterinaria\Principal.class
+edu\itch2\oop\veterinaria\FramePrincipal.class
+edu\itch2\oop\veterinaria\Perro.class
 edu\itch2\oop\veterinaria\Animal.class
+edu\itch2\oop\veterinaria\FramePrincipal$1.class
 edu\itch2\oop\veterinaria\Caballo.class
 edu\itch2\oop\veterinaria\Gato.class
