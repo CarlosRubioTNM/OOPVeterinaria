@@ -4,11 +4,13 @@
  */
 package edu.itch2.oop.veterinaria;
 
+import javax.swing.ListModel;
+
 /**
  *
  * @author Carlos Rubio
  */
-public class Caballo extends Animal{
+public class Caballo extends Animal {
     //Constance
     private static final double VELOCIDAD_INICIAL = 20;
     private static final String NOT_SPECIFIED = "Asígnale uno";

@@ -18,14 +18,14 @@ public abstract class Animal {
     protected String tipoSangre;
     protected String raza;
     protected double peso;
-    protected ArrayList alergias;
+    protected ArrayList<String> alergias;
     protected String color;
     protected String dueno;
     protected double altura;
-    protected ArrayList vacunas;
+    protected ArrayList<String> vacunas;
     protected Date fechaNacimiento;
-    protected ArrayList enfermedades;
-    protected ArrayList consultas;
+    protected ArrayList<String> enfermedades;
+    protected ArrayList<String> consultas;
     
     //Constructor
     public Animal() {
@@ -123,7 +123,8 @@ public abstract class Animal {
         if (index >= this.alergias.size() || index < 0) {
             return "Alergia no disponible";
         }
-        return (String) this.alergias.get(index);
+        
+        return this.alergias.get(index);
     }
     
     public void addAlergia(String alergia) {
@@ -185,7 +186,7 @@ public abstract class Animal {
         if (index >= this.vacunas.size() || index < 0) {
             return "Vacuna no disponible";
         }
-        return (String) this.vacunas.get(index);
+        return this.vacunas.get(index);
     }
     
     public void addVacunas(String vacuna) {
@@ -229,7 +230,7 @@ public abstract class Animal {
         if (index >= this.enfermedades.size() || index < 0) {
             return "Vacuna no disponible";
         }
-        return (String) this.enfermedades.get(index);
+        return this.enfermedades.get(index);
     }
     
     public void addEnfermedades(String enfermedad) {
@@ -265,7 +266,7 @@ public abstract class Animal {
         if (index >= this.consultas.size() || index < 0) {
             return "Vacuna no disponible";
         }
-        return (String) this.consultas.get(index);
+        return this.consultas.get(index);
     }
     
     public void addConsulta(String consulta) {

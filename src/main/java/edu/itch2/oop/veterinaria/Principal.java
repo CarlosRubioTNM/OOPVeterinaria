@@ -79,13 +79,15 @@ public class Principal {
         
         //Animal a1 = new Animal();
         Animal a1 = new Caballo("Prancer");
-        //System.out.println(a1.getVelocidad_maxima());
+        System.out.println(a1.getNombre());
         Caballo c1 = (Caballo) a1;
+        System.out.println(c1.getVelocidad_maxima());
         c1.setVelocidad_maxima(60);
         System.out.println(solovino);
         
-        /*Animal a2 = new Animal();*/
         Gato felix = new Gato();
+        
+        
         
         //System.out.println(c1.getNombre());
         

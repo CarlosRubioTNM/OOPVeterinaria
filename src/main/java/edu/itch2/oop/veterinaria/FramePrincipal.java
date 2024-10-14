@@ -5,6 +5,7 @@
 package edu.itch2.oop.veterinaria;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ListModel;
 import javax.swing.DefaultListModel;
 
