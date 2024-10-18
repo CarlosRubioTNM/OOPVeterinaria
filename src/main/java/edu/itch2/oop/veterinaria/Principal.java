@@ -91,6 +91,16 @@ public class Principal {
         
         //System.out.println(c1.getNombre());
         
+        
+        
+        
+        /****************************
+         * Excepciones
+         ****************************/
+        //Ejemplo de ClassCastException
+        //Date d1 = (Date) firulais; //Error de compilación: incompatible types
+        //Object miObjeto = new Perro();
+        //Date d = (Date) miObjeto;//ClassCastException
     }
   
 }
