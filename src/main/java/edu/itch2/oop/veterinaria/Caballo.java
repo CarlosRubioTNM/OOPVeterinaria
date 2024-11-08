@@ -4,6 +4,7 @@
  */
 package edu.itch2.oop.veterinaria;
 
+import java.util.ArrayList;
 import javax.swing.ListModel;
 
 /**
@@ -18,6 +19,7 @@ public class Caballo extends Animal {
     //Atributos
     private double velocidad_maxima;
     private String pedigree;
+    ArrayList<String> lista_tronar;
     
     //Constructores
     public Caballo() {
@@ -33,10 +35,18 @@ public class Caballo extends Animal {
         this.pedigree = NOT_SPECIFIED;
     }
 
+    /**
+     * Obtener la velocidad máxima del caballo
+     * @return La velocidad máxima del caballo
+     */
     public double getVelocidad_maxima() {
         return velocidad_maxima;
     }
 
+    /**
+     * Asignar la velocidad máxima del caballo
+     * @param velocidad_maxima Velocidad máxima del caballo
+     */
     public void setVelocidad_maxima(double velocidad_maxima) {
         this.velocidad_maxima = velocidad_maxima;
     }

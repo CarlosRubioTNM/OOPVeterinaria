@@ -1,0 +1,42 @@
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'22'
+-sourcepath
+'E:/Documentos/NetBeansProjects/veterinaria/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'E:/Documentos/NetBeansProjects/veterinaria/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'veterinaria 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'veterinaria 1.0-SNAPSHOT API'
+edu.itch2.oop.test
+edu.itch2.oop.veterinaria
+E:\Documentos\NetBeansProjects\veterinaria\src\main\java = 1725549417827
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\allclasses-index.html = 1730733945331
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\allpackages-index.html = 1730733945335
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\element-list = 1730733945143
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\help-doc.html = 1730733945402
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\index-all.html = 1730733945392
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\index.html = 1730733945307
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\member-search-index.js = 1730733945341
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\module-search-index.js = 1730733945337
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\overview-summary.html = 1730733945402
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\overview-tree.html = 1730733945302
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\package-search-index.js = 1730733945338
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\search.html = 1730733945392
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\serialized-form.html = 1730733945227
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\tag-search-index.js = 1730733945343
+E:\Documentos\NetBeansProjects\veterinaria\target\site\apidocs\type-search-index.js = 1730733945340

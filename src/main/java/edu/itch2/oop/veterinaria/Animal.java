@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
+ * Clase abstracta de un Animal en el contexto de una veterinaria
  * @author Carlos Rubio
+ * @version 0.2.1
  */
 public abstract class Animal {
     //Atributos
@@ -28,6 +29,9 @@ public abstract class Animal {
     protected ArrayList<String> consultas;
     
     //Constructor
+    /**
+     * Constructor sin argumentos que coloca valores por defecto
+     */
     public Animal() {
         this.alergias = new ArrayList();
         this.vacunas = new ArrayList();
@@ -42,11 +46,20 @@ public abstract class Animal {
         this.generarRegistro();
     }
     
+    /**
+     * Constructor donde se define el nombre del animal
+     * @param nombre Nombre del animal 
+     */
     public Animal(String nombre) {
         this();
         this.nombre = nombre;
     }
     
+    /**
+     * Constructor que define la raza y el nombre del animal
+     * @param raza Raza del animal
+     * @param nombre Nombre del animal
+     */
     public Animal(String raza, String nombre) {
         this();
         this.nombre = nombre;
@@ -119,9 +132,17 @@ public abstract class Animal {
         return alergias;
     }
     
-    public String getAlergia(int index) {
+    /**
+     * Obtiene la alergia determinada por el índice proporcionado
+     * @param index Índice de la alergia a obtener
+     * @return Alergia requerida
+     * @throws IndexOutOfBoundsException Si el índice es inválido
+     */
+    public String getAlergia(int index) throws IndexOutOfBoundsException {
         if (index >= this.alergias.size() || index < 0) {
-            return "Alergia no disponible";
+            //return "Alergia no disponible";
+            //Con excepciones
+            throw new IndexOutOfBoundsException("No existe una alergia en este índice.");
         }
         
         return this.alergias.get(index);
@@ -298,6 +319,7 @@ public abstract class Animal {
 
     @Override
     public String toString() {
+        Object o = new Object();
         return "Animal con nombre: " + this.getNombre() + " y dueño" + this.getDueno();
     }
     

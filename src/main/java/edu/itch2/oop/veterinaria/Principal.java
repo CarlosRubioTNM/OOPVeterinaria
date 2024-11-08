@@ -5,11 +5,14 @@
 package edu.itch2.oop.veterinaria;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +38,7 @@ public class Principal {
         perro.addAlergia("Huevo");
         perro.addAlergia("Lacteos");
         perro.removeAlergia(3);
-        String alergia = perro.getAlergia(60);
+        //String alergia = perro.getAlergia(60);
         ArrayList alergias = perro.getAllAlergias();
         //System.out.println(alergias);
         //System.out.println("La alergia de " + perro.getNombre() + " es: " + alergia);
@@ -101,6 +104,60 @@ public class Principal {
         //Date d1 = (Date) firulais; //Error de compilación: incompatible types
         //Object miObjeto = new Perro();
         //Date d = (Date) miObjeto;//ClassCastException
+        
+        //Ejemplo de IndexOutOfBoundsException
+        //ArrayList<String> lista = new ArrayList<>();
+        //System.out.println(lista.get(5));
+        /*int []califas = new int[4]; //Arreglo de elementos
+        califas[0] = 100;
+        califas[1] = 100;
+        califas[2] = 100;
+        califas[3] = 100;
+        //ArrayIndexOutOfBoundsException
+        System.out.println(califas[4]);*/
+        
+        //Ejemplo NullPointerException
+        /*Caballo fir = new Caballo();
+        fir.lista_tronar.add("Hola");*/
+        
+        //Ejemplo ArithmeticException
+        /*int num = 10;
+        int den = 0;
+        System.out.println(num/den);*/
+        
+        //Ejemplo NumberFormatException
+        /*System.out.println("Proporciona un número entero:");
+        Scanner scanner = new Scanner(System.in);
+        String valor = scanner.next();
+        int valorEntero = 0;
+        try {
+            valorEntero = Integer.parseInt(valor);
+            System.out.println("Escribiste: " + (valorEntero*2));
+        } catch (NumberFormatException e) {
+            System.out.println("La regaste! no te pases de lanza. Te dije que necesitaba un número entero.");
+        }*/
+        
+        //Lanzar nuestras propias excepciones
+        
+        /*try {
+            firulais.getAlergia(15);
+        } catch(IndexOutOfBoundsException e) {
+            
+        }*/
+        
+        //Leer archivo
+        File miArchivo = new File("E:\\Embebidos\\archivo.txt");
+        Scanner sc;
+        try {
+            sc = new Scanner(miArchivo);
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                System.out.println(linea);
+            }
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encontró el archivo.");
+        }
     }
   
 }

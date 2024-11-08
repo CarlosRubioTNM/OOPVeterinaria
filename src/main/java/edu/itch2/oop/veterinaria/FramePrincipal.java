@@ -186,6 +186,8 @@ public class FramePrincipal extends javax.swing.JFrame {
             pedigree = jTextField2.getText();
         }
         
+        //Checar si el dueño comienza con una letra mayúscula
+        
         //Crear caballo
         Caballo c1 = new Caballo(jTextField1.getText());
         c1.setPedigree(pedigree);
