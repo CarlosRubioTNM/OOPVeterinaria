@@ -5,8 +5,12 @@
 package edu.itch2.oop.veterinaria;
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -157,6 +161,22 @@ public class Principal {
             sc.close();
         } catch (FileNotFoundException ex) {
             System.out.println("No se encontró el archivo.");
+        }
+        
+        //Escribir archivo
+        try {
+            File nuevoArchivo = new File("archivo12nov.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(nuevoArchivo, true));
+            //Sobreescribir el archivo.
+            writer.newLine();
+            writer.write("Otras cosas."); 
+            //Añadir texto al archivo
+            writer.newLine();
+            writer.write("Texto extra!");
+            writer.close();
+            System.out.println("LISTO!");
+        } catch (IOException ex) {
+            System.out.println("No se pudo escribir en el archivo.");
         }
     }
   
