@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -178,6 +179,10 @@ public class Principal {
         } catch (IOException ex) {
             System.out.println("No se pudo escribir en el archivo.");
         }
+        
+        //Ventanas de mensaje.
+        JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                "ERROR", JOptionPane.ERROR_MESSAGE);
     }
   
 }

@@ -4,10 +4,14 @@
  */
 package edu.itch2.oop.veterinaria;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 import javax.swing.ListModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,15 +21,84 @@ public class FramePrincipal extends javax.swing.JFrame {
     //Atributos
     private DefaultListModel<String> modelo;
     private ArrayList<Caballo> caballos;
+    private File archivoCaballos;
 
     /**
      * Creates new form FramePrincipal
      */
     public FramePrincipal() {
         initComponents();
+        archivoCaballos = new File("Caballos.cbl");
         caballos = new ArrayList<>();
         modelo = new DefaultListModel<>();
         jList1.setModel(modelo);
+        Scanner sc;
+        try {
+            sc = new Scanner(archivoCaballos);
+            int nCaballos = 0;
+            String nombre;
+            String pedigree;
+            String tipoSangre;
+            if (sc.hasNextInt()) { //Número de caballos
+                nCaballos = sc.nextInt();
+            } else {
+                JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                sc.close();
+                return;
+            }
+            
+            for (int i = 0; i < nCaballos; i++) {
+                //Nombre del caballo
+                if (sc.hasNext()) {
+                    nombre = sc.next();
+                } else {
+                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    sc.close();
+                    return;
+                }
+                
+                //Pedigree
+                if (sc.hasNext()) {
+                    pedigree = sc.next();
+                } else {
+                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    sc.close();
+                    return;
+                }
+                
+                //Tipo de sangre
+                if (sc.hasNext()) {
+                    tipoSangre = sc.next();
+                    if (!tipoSangre.equals("O-") &&
+                            !tipoSangre.equals("O+") && 
+                            !tipoSangre.equals("A") &&
+                            !tipoSangre.equals("B") &&
+                            !tipoSangre.equals("AB")) {
+                        JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                        sc.close();
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    sc.close();
+                    return;
+                }
+            }
+            
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                System.out.println(linea);
+            }
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("No existe el archivo Caballos.cbl");
+        }
+        
     }
 
     /**
@@ -87,7 +160,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextField2.setName("txtNombre"); // NOI18N
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A", "B", "AB" }));
-        jComboBox1.setSelectedIndex(3);
 
         jLabel5.setText("Tipo de sangre:");
         jLabel5.setName("lblNombre"); // NOI18N
