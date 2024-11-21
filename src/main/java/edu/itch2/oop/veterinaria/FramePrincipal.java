@@ -4,8 +4,11 @@
  */
 package edu.itch2.oop.veterinaria;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -56,6 +59,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
                         "ERROR", JOptionPane.ERROR_MESSAGE);
                     sc.close();
+                    caballos.clear(); //Eliminar todos los caballos de la lista
+                    modelo.clear();
                     return;
                 }
                 
@@ -66,6 +71,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
                         "ERROR", JOptionPane.ERROR_MESSAGE);
                     sc.close();
+                    caballos.clear(); //Eliminar todos los caballos de la lista
+                    modelo.clear();
                     return;
                 }
                 
@@ -80,6 +87,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
                                 "ERROR", JOptionPane.ERROR_MESSAGE);
                         sc.close();
+                        caballos.clear(); //Eliminar todos los caballos de la lista
+                        modelo.clear();
                         return;
                     }
                 } else {
@@ -88,12 +97,17 @@ public class FramePrincipal extends javax.swing.JFrame {
                     sc.close();
                     return;
                 }
+                
+                //Crear el caballo
+                Caballo c1 = new Caballo(nombre);
+                c1.setPedigree(pedigree);
+                c1.setTipoSangre(tipoSangre);
+                
+                //Añadir caballo a listas
+                caballos.add(c1);
+                modelo.addElement(nombre);
             }
             
-            while (sc.hasNextLine()) {
-                String linea = sc.nextLine();
-                System.out.println(linea);
-            }
             sc.close();
         } catch (FileNotFoundException ex) {
             System.out.println("No existe el archivo Caballos.cbl");
@@ -122,6 +136,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jLabel4.setText("Nombre del caballo:");
         jLabel4.setName("lblNombre"); // NOI18N
@@ -132,6 +150,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         setName("framePOO"); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -175,6 +196,24 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jList1);
+
+        jMenu1.setText("Archivo");
+
+        jMenuItem1.setText("Abrir");
+        jMenuItem1.setName("menuAbrir"); // NOI18N
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Guardar");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -291,6 +330,38 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBox1.setSelectedItem(c1.getTipoSangre());
     }//GEN-LAST:event_jList1ValueChanged
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //Escribir el archivo de caballos
+        try {
+            File nuevoArchivo = new File("Caballos.cbl");
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(nuevoArchivo, false)); //Sobreescribir el archivo
+            int nCaballos = caballos.size();
+            System.out.println(nCaballos);
+            Caballo caballoTemp;
+            writer.write(String.valueOf(nCaballos));
+            writer.newLine();
+            for (int i = 0; i < nCaballos; i++) {
+                caballoTemp = caballos.get(i);
+                writer.write(caballoTemp.getNombre());
+                writer.newLine();
+                writer.write(caballoTemp.getPedigree());
+                writer.newLine();
+                writer.write(caballoTemp.getTipoSangre());
+                writer.newLine();
+            }
+            
+            writer.close();
+            System.out.println("Archivo de caballos creado!");
+        } catch (IOException ex) {
+            System.out.println("No se pudo escribir en el archivo.");
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -336,6 +407,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

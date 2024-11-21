@@ -167,7 +167,8 @@ public class Principal {
         //Escribir archivo
         try {
             File nuevoArchivo = new File("archivo12nov.txt");
-            BufferedWriter writer = new BufferedWriter(new FileWriter(nuevoArchivo, true));
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(nuevoArchivo, true));
             //Sobreescribir el archivo.
             writer.newLine();
             writer.write("Otras cosas."); 
