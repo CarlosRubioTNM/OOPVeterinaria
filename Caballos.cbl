@@ -1,10 +1,4 @@
-3
-ewrfnio
-sada
-B
-Prancer
-Percheron
-O+
+1
 Rayo
 Cruza
 AB

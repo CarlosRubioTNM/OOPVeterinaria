@@ -136,6 +136,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        btnEliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -197,6 +198,15 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
+        btnEliminar.setBackground(new java.awt.Color(255, 102, 102));
+        btnEliminar.setText("Eliminar caballo");
+        btnEliminar.setName("btnEliminar"); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Archivo");
 
         jMenuItem1.setText("Abrir");
@@ -220,31 +230,19 @@ public class FramePrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                .addComponent(jLabel3)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel5))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(56, 56, 56)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -259,7 +257,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,10 +271,11 @@ public class FramePrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
-                .addContainerGap())
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,7 +323,16 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-        Caballo c1 = caballos.get(jList1.getSelectedIndex());
+        int indice =jList1.getSelectedIndex();
+        if (indice == -1) {
+            //Reset interfaz grafica
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jComboBox1.setSelectedIndex(0);
+            return;
+        }
+        
+        Caballo c1 = caballos.get(indice);
         jTextField1.setText(c1.getNombre());
         jTextField2.setText(c1.getPedigree());
         jComboBox1.setSelectedItem(c1.getTipoSangre());
@@ -362,6 +370,25 @@ public class FramePrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int indice = jList1.getSelectedIndex();
+        
+        //Revisar índice
+        if (indice == -1) {
+            JOptionPane.showMessageDialog(null,"No hay caballo seleccionado.",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        caballos.remove(indice);
+        modelo.remove(indice);
+        
+        //Reset interfaz grafica
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jComboBox1.setSelectedIndex(0);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -398,6 +425,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
