@@ -14,7 +14,10 @@ import java.util.Date;
 import java.util.Scanner;
 import javax.swing.ListModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -125,6 +128,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -137,10 +141,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         btnEliminar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        mnuArchivo = new javax.swing.JMenu();
+        mnuAbrir = new javax.swing.JMenuItem();
+        mnuGuardar = new javax.swing.JMenuItem();
 
         jLabel4.setText("Nombre del caballo:");
         jLabel4.setName("lblNombre"); // NOI18N
@@ -207,23 +211,27 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Archivo");
+        mnuArchivo.setText("Archivo");
 
-        jMenuItem1.setText("Abrir");
-        jMenuItem1.setName("menuAbrir"); // NOI18N
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnuAbrir.setText("Abrir...");
+        mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnuAbrirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        mnuArchivo.add(mnuAbrir);
 
-        jMenuItem2.setText("Guardar");
-        jMenu1.add(jMenuItem2);
+        mnuGuardar.setText("Guardar como...");
+        mnuGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuGuardarActionPerformed(evt);
+            }
+        });
+        mnuArchivo.add(mnuGuardar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar2.add(mnuArchivo);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,8 +248,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -366,10 +374,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int indice = jList1.getSelectedIndex();
         
@@ -389,10 +393,139 @@ public class FramePrincipal extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(0);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
+        JFileChooser abrir = new JFileChooser();
+        FileFilter miFiltro = new FileNameExtensionFilter("Archivo de caballos.", "cbl");
+        abrir.setFileFilter(miFiltro);
+        int resultado = abrir.showOpenDialog(null);
+        
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            abrirArchivo(abrir.getSelectedFile());
+        }
+    }//GEN-LAST:event_mnuAbrirActionPerformed
+
+    private void mnuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGuardarActionPerformed
+        JFileChooser guardar = new JFileChooser();
+        FileFilter miFiltro = new FileNameExtensionFilter("Archivo de caballos.", "cbl");
+        guardar.setFileFilter(miFiltro);
+        int resultado = guardar.showSaveDialog(null);
+        
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            guardarArchivo(guardar.getSelectedFile());
+        }
+    }//GEN-LAST:event_mnuGuardarActionPerformed
+
+    public void abrirArchivo(File f) {
+        Scanner sc;
+        try {
+            sc = new Scanner(f);
+            int nCaballos = 0;
+            String nombre;
+            String pedigree;
+            String tipoSangre;
+            if (sc.hasNextInt()) { //Número de caballos
+                nCaballos = sc.nextInt();
+            } else {
+                JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                sc.close();
+                return;
+            }
+            
+            for (int i = 0; i < nCaballos; i++) {
+                //Nombre del caballo
+                if (sc.hasNext()) {
+                    nombre = sc.next();
+                } else {
+                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    sc.close();
+                    caballos.clear(); //Eliminar todos los caballos de la lista
+                    modelo.clear();
+                    return;
+                }
+                
+                //Pedigree
+                if (sc.hasNext()) {
+                    pedigree = sc.nextLine();
+                } else {
+                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    sc.close();
+                    caballos.clear(); //Eliminar todos los caballos de la lista
+                    modelo.clear();
+                    return;
+                }
+                
+                //Tipo de sangre
+                if (sc.hasNext()) {
+                    tipoSangre = sc.next();
+                    if (!tipoSangre.equals("O-") &&
+                            !tipoSangre.equals("O+") && 
+                            !tipoSangre.equals("A") &&
+                            !tipoSangre.equals("B") &&
+                            !tipoSangre.equals("AB")) {
+                        JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                        sc.close();
+                        caballos.clear(); //Eliminar todos los caballos de la lista
+                        modelo.clear();
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    sc.close();
+                    return;
+                }
+                
+                //Crear el caballo
+                Caballo c1 = new Caballo(nombre);
+                c1.setPedigree(pedigree);
+                c1.setTipoSangre(tipoSangre);
+                
+                //Añadir caballo a listas
+                caballos.add(c1);
+                modelo.addElement(nombre);
+            }
+            
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("No existe el archivo Caballos.cbl");
+        }
+    }
+    
+    public void guardarArchivo(File f) {
+        //Escribir el archivo de caballos
+        try {
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(f, false)); //Sobreescribir el archivo
+            int nCaballos = caballos.size();
+            System.out.println(nCaballos);
+            Caballo caballoTemp;
+            writer.write(String.valueOf(nCaballos));
+            writer.newLine();
+            for (int i = 0; i < nCaballos; i++) {
+                caballoTemp = caballos.get(i);
+                writer.write(caballoTemp.getNombre());
+                writer.newLine();
+                writer.write(caballoTemp.getPedigree());
+                writer.newLine();
+                writer.write(caballoTemp.getTipoSangre());
+                writer.newLine();
+            }
+            
+            writer.close();
+            System.out.println("Archivo de caballos creado!");
+        } catch (IOException ex) {
+            System.out.println("No se pudo escribir en el archivo.");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String... args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -428,6 +561,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -435,12 +569,12 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JMenuItem mnuAbrir;
+    private javax.swing.JMenu mnuArchivo;
+    private javax.swing.JMenuItem mnuGuardar;
     // End of variables declaration//GEN-END:variables
 }

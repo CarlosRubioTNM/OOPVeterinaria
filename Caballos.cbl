@@ -1,4 +1,1 @@
-1
-Rayo
-Cruza
-AB
+0
