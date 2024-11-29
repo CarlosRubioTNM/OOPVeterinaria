@@ -38,83 +38,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         caballos = new ArrayList<>();
         modelo = new DefaultListModel<>();
         jList1.setModel(modelo);
-        Scanner sc;
-        try {
-            sc = new Scanner(archivoCaballos);
-            int nCaballos = 0;
-            String nombre;
-            String pedigree;
-            String tipoSangre;
-            if (sc.hasNextInt()) { //Número de caballos
-                nCaballos = sc.nextInt();
-            } else {
-                JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
-                sc.close();
-                return;
-            }
-            
-            for (int i = 0; i < nCaballos; i++) {
-                //Nombre del caballo
-                if (sc.hasNext()) {
-                    nombre = sc.next();
-                } else {
-                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
-                    sc.close();
-                    caballos.clear(); //Eliminar todos los caballos de la lista
-                    modelo.clear();
-                    return;
-                }
-                
-                //Pedigree
-                if (sc.hasNext()) {
-                    pedigree = sc.next();
-                } else {
-                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
-                    sc.close();
-                    caballos.clear(); //Eliminar todos los caballos de la lista
-                    modelo.clear();
-                    return;
-                }
-                
-                //Tipo de sangre
-                if (sc.hasNext()) {
-                    tipoSangre = sc.next();
-                    if (!tipoSangre.equals("O-") &&
-                            !tipoSangre.equals("O+") && 
-                            !tipoSangre.equals("A") &&
-                            !tipoSangre.equals("B") &&
-                            !tipoSangre.equals("AB")) {
-                        JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
-                                "ERROR", JOptionPane.ERROR_MESSAGE);
-                        sc.close();
-                        caballos.clear(); //Eliminar todos los caballos de la lista
-                        modelo.clear();
-                        return;
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
-                    sc.close();
-                    return;
-                }
-                
-                //Crear el caballo
-                Caballo c1 = new Caballo(nombre);
-                c1.setPedigree(pedigree);
-                c1.setTipoSangre(tipoSangre);
-                
-                //Añadir caballo a listas
-                caballos.add(c1);
-                modelo.addElement(nombre);
-            }
-            
-            sc.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("No existe el archivo Caballos.cbl");
-        }
+        abrirArchivo(archivoCaballos);
         
     }
 
@@ -348,30 +272,8 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //Escribir el archivo de caballos
-        try {
-            File nuevoArchivo = new File("Caballos.cbl");
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(nuevoArchivo, false)); //Sobreescribir el archivo
-            int nCaballos = caballos.size();
-            System.out.println(nCaballos);
-            Caballo caballoTemp;
-            writer.write(String.valueOf(nCaballos));
-            writer.newLine();
-            for (int i = 0; i < nCaballos; i++) {
-                caballoTemp = caballos.get(i);
-                writer.write(caballoTemp.getNombre());
-                writer.newLine();
-                writer.write(caballoTemp.getPedigree());
-                writer.newLine();
-                writer.write(caballoTemp.getTipoSangre());
-                writer.newLine();
-            }
-            
-            writer.close();
-            System.out.println("Archivo de caballos creado!");
-        } catch (IOException ex) {
-            System.out.println("No se pudo escribir en el archivo.");
-        }
+        File nuevoArchivo = new File("Caballos.cbl");
+        guardarArchivo(nuevoArchivo);
     }//GEN-LAST:event_formWindowClosing
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -425,6 +327,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             String tipoSangre;
             if (sc.hasNextInt()) { //Número de caballos
                 nCaballos = sc.nextInt();
+                sc.nextLine();
             } else {
                 JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
                         "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -435,7 +338,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             for (int i = 0; i < nCaballos; i++) {
                 //Nombre del caballo
                 if (sc.hasNext()) {
-                    nombre = sc.next();
+                    nombre = sc.nextLine();
                 } else {
                     JOptionPane.showMessageDialog(null,"El archivo está corrupto.",
                         "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -459,7 +362,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                 
                 //Tipo de sangre
                 if (sc.hasNext()) {
-                    tipoSangre = sc.next();
+                    tipoSangre = sc.nextLine();
                     if (!tipoSangre.equals("O-") &&
                             !tipoSangre.equals("O+") && 
                             !tipoSangre.equals("A") &&
